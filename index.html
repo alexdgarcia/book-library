@@ -7,9 +7,58 @@
 
     <title></title>
     <link rel="stylesheet" href="styles.css" />
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/ffaed3d8bd.js"
+        crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <script src="scripts.js"></script>
+    <div class="modal">
+      <div class="modal-container">
+        <div class="modal-content">
+          <form class="bookForm">
+            <div class="bookForm-row">
+              <label for="title">Title</label>
+              <input id="title" name="title" type="text"/>
+              <span class="bookForm-error">This is a required field</span>
+            </div>
+            <div class="bookForm-row">
+              <label for="author">Author</label>
+              <input id="author" name="author" type="text"/>
+              <span class="bookForm-error">This is a required field</span>
+            </div>
+            <div class="bookForm-row">
+              <label for="pages">Number of Pages</label>
+              <input id="pages" name="pages" type="text"/>
+              <span class="bookForm-error">This is a required field</span>
+            </div>
+            <div class="bookForm-row">
+              <label for="isRead" class="bookForm-radioLabel">
+                <input id="isRead" name="isRead" type="checkbox" value="true"/>
+                <span>I've Read it</span>
+              </label>
+            </div>
+            <div class="bookForm-buttonContainer">
+              <button class="bookForm-button">Submit</button>
+            </div>
+            <!-- https://stackoverflow.com/questions/22148080/an-invalid-form-control-with-name-is-not-focusable -->
+            <!-- <div class="bookForm-buttonContainer">
+              <input type="submit" class="bookForm-button"/>
+            </div>
+            -->
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="library">
+      </div>
+    </div>
+    <div class="buttonContainer">
+      <button>
+        <span>&#43;</span>
+      </button>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>
