@@ -8,7 +8,7 @@ let myLibrary = [];
 addNewBook.addEventListener("click", toggleModal);
 submitButton.addEventListener("click", validateInputs);
 
-function Book(title, author, pages, isRead) {
+function Book({ title, author, pages, isRead }) {
   this.title  = title;
   this.author = author;
   this.pages = pages;
@@ -20,12 +20,13 @@ Book.prototype.changeReadStatus = function() {
 }
 
 function validateInputs(event) {
+  // Prevents default form submit behavior
   event.preventDefault();
-  const bookTitle = document.querySelector("#title");
-  const bookAuthor = document.querySelector("#author");
-  const bookPages = document.querySelector("#pages");
+  const title = document.querySelector("#title");
+  const author = document.querySelector("#author");
+  const pages = document.querySelector("#pages");
   const isRead = document.querySelector("#isRead");
-  let emptyFields = [bookTitle, bookAuthor, bookPages].filter((el) => {
+  let emptyFields = [title, author, pages].filter((el) => {
     if (!el.value) el.nextElementSibling.classList.add("show");
     return el.value === '';
   });
@@ -33,7 +34,8 @@ function validateInputs(event) {
   if (emptyFields.length) {
     return;
   } else {
-    addBookToLibrary(bookTitle, bookAuthor, bookPages, isRead);
+    addBookToLibrary(title.value, author.value, pages.value, isRead.checked);
+    resetModal(title, author, pages);
   }
 }
 
@@ -42,12 +44,11 @@ function toggleModal() {
 }
 
 function addBookToLibrary(title, author, pages, isRead) {
-  const book = new Book(title.value, author.value, pages.value, isRead.checked);
+  const book = new Book({ title, author, pages, isRead });
 
   myLibrary.push(book);
   updateLocalStorage();
   renderLibrary();
-  resetModal(title, author, pages);
 }
 
 function resetModal(title, author, pages) {
@@ -118,12 +119,13 @@ function changeReadStatus(event) {
 }
 
 function init() {
-  if (!localStorage.getItem("myLibrary")) {
-    localStorage.setItem("myLibrary", JSON.stringify([]));
-  } else {
-    myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
-  }
+  const data = (localStorage.getItem("myLibrary")) ?
+      JSON.parse(localStorage.getItem("myLibrary")) :
+      [];
 
+  // JSON.stringify only returns enumerable properties, i.e. prototype
+  // properties will not be preserved.
+  data.forEach(book => myLibrary.push(new Book(book)));
   renderLibrary(myLibrary);
 }
 
