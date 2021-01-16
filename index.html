@@ -13,6 +13,19 @@
   </head>
 
   <body>
+    <div class="storageModal show">
+      <div class="storageModal-container">
+        <div class="storageModal-content">
+          <p>Where would you like to store your library?</p>
+          <div class="storageModal-buttons">
+            <button class="localStorage">
+              LocalStorage
+            </button>
+            <button class="cloud">Cloud</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="modal">
       <div class="modal-container">
         <div class="modal-content">
@@ -59,6 +72,12 @@
         <span>&#43;</span>
       </button>
     </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+    <!-- Firebase Services -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <!-- JS -->
     <script src="script.js"></script>
   </body>
 </html>
